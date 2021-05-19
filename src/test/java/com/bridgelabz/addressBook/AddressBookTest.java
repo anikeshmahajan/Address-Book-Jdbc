@@ -26,7 +26,13 @@ public class AddressBookTest {
 	
 	@Test
 	public void givenNewAddressForRecord_WhenUpdated_ShouldSyncWithDatabase() throws AddressBookException {
-		addressBookFunction.updateRecord("Tanmay","Malviya Nagar");
-		assertTrue(addressBookFunction.checkAddressBookInSyncWithDB("Tanmay"));
+		addressBookFunction.updateRecord("Anikesh"," Jammu");
+		assertTrue(addressBookFunction.checkAddressBookInSyncWithDB("Anikesh"));
+	}
+	
+	@Test
+	public void givenDateRangeForRecord_WhenRetrieved_ShouldReturnProperData() throws AddressBookException {
+		List<Contacts> recordDataInGivenDateRange = addressBookFunction.getRecordAddedInDateRange("2018-01-01","2021-05-20");
+		assertEquals(2, recordDataInGivenDateRange.size());
 	}
 }
