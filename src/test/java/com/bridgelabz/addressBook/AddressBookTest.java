@@ -3,8 +3,7 @@ package com.bridgelabz.addressBook;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
-import java.time.LocalDate;
-import java.util.List;
+import java.util.*;
 
 import com.bridgelabz.addressBook.Exception.AddressBookException;
 import com.bridgelabz.addressBook.Models.Contacts;
@@ -48,5 +47,26 @@ public class AddressBookTest {
 		addressBookFunction.addContactToRecord("Avni", "Prabha", "Mall Road",
 				"Gurugram", "Haryana", 12345, "8456211111", "av.prabha@gmail.com");
 		assertTrue(addressBookFunction.checkAddressBookInSyncWithDB("Avni"));
+	}
+	
+	@Test
+	public void givenMultipleContact_WhenAdded_ShouldSyncWithDB() throws AddressBookException {
+		Contacts[] contactArr= {
+				new Contacts("Akhil", "Sharma", "abc", "Rohtak",
+						"Haryana", 12312, "846555555", "aksharma@gmail.com"),
+				new Contacts("Donal", "Trump", "White House", "Washington",
+						"Washington DC", 100001, "9999999999", "pm@gmai.com"),
+				new Contacts("Saket", "Jain", "xyz", "Sampak",
+						"MP", 230056, "123456", "saket@gmail.com"),
+		};
+		List<Contacts> record=Arrays.asList(contactArr);
+		addressBookFunction.addMultipleContactsToRecord(record);
+		
+		assertTrue(addressBookFunction.checkAddressBookInSyncWithDB("Akhil"));
+		assertTrue(addressBookFunction.checkAddressBookInSyncWithDB("Donal"));
+		assertTrue(addressBookFunction.checkAddressBookInSyncWithDB("Saket"));
+		
+		record=addressBookFunction.readContactData();
+		assertEquals(6, record.size());
 	}
 }
