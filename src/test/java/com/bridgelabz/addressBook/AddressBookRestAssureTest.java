@@ -100,6 +100,7 @@ public class AddressBookRestAssureTest {
 		assertTrue(flag);
 		assertEquals(5, contactArr.length);
 	}
+	@Test
 	public void givenAddressForContact_WhenUpdated_ShouldReturn200ResponseAndSync() throws AddressBookException {
 
 		addressBookFunction.updateRecordInServer("Anikesh", "Jammu");
@@ -119,5 +120,20 @@ public class AddressBookRestAssureTest {
 	public boolean checkAddressBookInSyncWithServer(String firstName) {
 		List<Contacts> checkList = Arrays.asList(getContactArr());
 		return (checkList.get(0).firstName).equals(firstName);
+	}
+	@Test
+	public void givenContactToDlete_WhenDeleted_ShouldReturn200ResponseAndCountAndSync() throws AddressBookException {
+
+		Contacts contact=addressBookFunction.getRecordDataByName("Narendra");
+		RequestSpecification requestSpecification = RestAssured.given();
+		requestSpecification.header("Content-Type","application/json");
+		Response response = requestSpecification.delete("//addressbook/"+contact.firstName);
+
+		addressBookFunction.deleteFromServer(contact.firstName);
+
+		contactArr = getContactArr();
+
+		boolean flag=(!checkAddressBookInSyncWithServer("Narendra")) && contactArr.length==4 && response.getStatusCode()==200;
+		assertTrue(flag);
 	}
 }
