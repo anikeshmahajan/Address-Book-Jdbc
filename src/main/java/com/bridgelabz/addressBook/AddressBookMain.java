@@ -1,7 +1,6 @@
 package com.bridgelabz.addressBook;
 
-import java.time.LocalDate;
-import java.util.List;
+import java.util.*;
 
 import com.bridgelabz.addressBook.Exception.AddressBookException;
 import com.bridgelabz.addressBook.Exception.AddressBookException.ExceptionType;
@@ -14,6 +13,9 @@ public class AddressBookMain {
 	public List<Contacts> record;
 	private AddressBookDBIO bookDBobj;
 	
+	public void setContactDataList(List<Contacts> record) {
+		this.record = new ArrayList<>(record);
+	}
 	
 	public AddressBookMain() {
 		bookDBobj=AddressBookDBIO.getInstance();
@@ -71,5 +73,12 @@ public class AddressBookMain {
 	
 	public void addMultipleContactsToRecord(List<Contacts> record) {
 		bookDBobj.addMultipleContactsToRecord(record);
+	}
+
+	public long sizeOfContactList() {
+		
+		
+	        return this.record.size();
+	    
 	}
 }

@@ -17,7 +17,9 @@ public class AddressBookDBIO {
 	private PreparedStatement recordDataStatement;
 
 	public enum StatementType 
-	{PREPARED_STATEMENT, STATEMENT}	
+	{
+		PREPARED_STATEMENT, STATEMENT
+		}	
 
 	private void preparedStatementForRecord() {
 		try {

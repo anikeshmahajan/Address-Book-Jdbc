@@ -26,4 +26,12 @@ dependencies {
 
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
+     compile 'com.google.code.gson:gson:2.2.+'
+         implementation group: 'com.opencsv', name: 'opencsv', version: '5.4'
+    implementation group: 'org.json', name: 'json', version: '20210307'
+    
+
+    testCompile group: 'io.rest-assured', name: 'rest-assured', version: '4.3.1'
+    
+     
 }
