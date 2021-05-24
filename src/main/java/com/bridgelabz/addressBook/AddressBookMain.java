@@ -31,7 +31,7 @@ public class AddressBookMain {
 		return record;
 	}
 	
-	private Contacts getRecordDataByName(String firstName) {
+	public  Contacts getRecordDataByName(String firstName) {
 		Contacts contactData = this.record.stream()
 				.filter(contact->contact.firstName.equals(firstName))
 				.findFirst()
@@ -46,7 +46,7 @@ public class AddressBookMain {
 			throw new AddressBookException(ExceptionType.UPDATE_FAIL, "Update Failed");
 		else 
 			contactData = this.getRecordDataByName(firstName);
-		if(contactData!=null) {
+		if(contactData!=null) { 
 			contactData.address = address;
 		}
 	}
@@ -80,5 +80,9 @@ public class AddressBookMain {
 		
 	        return this.record.size();
 	    
+	}
+	public void updateRecordInServer(String firstName, String address) throws AddressBookException {
+		Contacts contact =  this.getRecordDataByName(firstName);
+		if(contact!=null) contact.address=address;
 	}
 }
